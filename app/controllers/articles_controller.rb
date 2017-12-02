@@ -17,6 +17,7 @@ class ArticlesController < ApplicationController
   # GET /articles/new
   def new
     @article = Article.new
+
   end
 
   # GET /articles/1/edit
@@ -28,13 +29,13 @@ class ArticlesController < ApplicationController
   def create
 
     # Check to see if the user is registered/logged in
-  if current_user.nil?
+ # if current_user.nil?
      # Store the form data in the session so we can retrieve it after login
-    session[:list] = params
+  #  session[:list] = params
      # Redirect the user to register/login
-     redirect_to new_user_registration_path 
+  #   redirect_to new_user_registration_path 
 
-  else   
+ # else   
     
 
     @article = current_user.articles.new(article_params)
@@ -51,7 +52,7 @@ class ArticlesController < ApplicationController
         format.json { render json: @article.errors, status: :unprocessable_entity }
       end
     end
-  end  
+ # end  
   end
 
   # PATCH/PUT /articles/1
@@ -86,7 +87,8 @@ class ArticlesController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def article_params
-      params.require(:article).permit(:title, :author, :description, :image)
+      params.require(:article).permit(:title, :author, :description, :image,
+       article_photos_attributes: [:article_id, :id, :image])
     end
 end
 

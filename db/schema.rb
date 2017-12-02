@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20171120154109) do
+ActiveRecord::Schema.define(version: 20171202050630) do
+
+  create_table "article_photos", force: :cascade do |t|
+    t.integer  "articles_id"
+    t.datetime "created_at",         null: false
+    t.datetime "updated_at",         null: false
+    t.string   "image_file_name"
+    t.string   "image_content_type"
+    t.integer  "image_file_size"
+    t.datetime "image_updated_at"
+    t.index ["articles_id"], name: "index_article_photos_on_articles_id"
+  end
 
   create_table "articles", force: :cascade do |t|
     t.string   "title"
